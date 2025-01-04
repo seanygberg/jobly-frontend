@@ -9,6 +9,7 @@ const SignupForm = ({ signup }) => {
     firstName: "",
     lastName: "",
     email: "",
+    is_admin = false;
   });
   const [error, setError] = useState("");
 
