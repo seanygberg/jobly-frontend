@@ -28,9 +28,8 @@ class JoblyApi {
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
-      console.error("API Error:", err);
-      let message = err.response ? err.response.data.error.message : err.message || "Unknown error";
-      console.error("Error details:", err.response ? err.response.data : err);
+      console.error("API Error:", err.response);
+      let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
   }
