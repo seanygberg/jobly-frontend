@@ -37,7 +37,7 @@ const ProfileForm = () => {
         let newUser;
 
         try {
-            newUser = await JoblyApi.saveProfile(username, profileData);
+            newUser = await JoblyApi.editProfile(username, profileData);
         } catch (errors) {
             setFormErrors(errors);
             return;
