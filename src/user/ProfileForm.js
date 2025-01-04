@@ -39,6 +39,7 @@ const ProfileForm = () => {
         try {
             newUser = await JoblyApi.editProfile(username, profileData);
         } catch (errors) {
+            console.error("Profile update failed:", errors);
             setFormErrors(errors);
             return;
         }
