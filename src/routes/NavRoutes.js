@@ -3,6 +3,7 @@ import Home from "../home/Home.js"
 import LoginForm from "../user/LoginForm.js"
 import SignupForm from "../user/SignupForm.js"
 import ProfileForm from "../user/ProfileForm.js"
+import PrivateRoute from "./PrivateRoute.js"
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function NavRoutes({ signup, login }) {
