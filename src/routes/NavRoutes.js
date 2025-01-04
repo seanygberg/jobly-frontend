@@ -2,6 +2,7 @@ import React from "react";
 import Home from "../home/Home.js"
 import LoginForm from "../user/LoginForm.js"
 import SignupForm from "../user/SignupForm.js"
+import ProfileForm from "../user/ProfileForm.js"
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function NavRoutes({ signup, login }) {
@@ -22,7 +23,7 @@ function NavRoutes({ signup, login }) {
                 <Route path="/jobs" />
                 <Route path="/login" element={<LoginForm login={login}/>} />
                 <Route path="/signup" element={<SignupForm signup={signup}/>} />
-                <Route path="/profile" />
+                <Route path="/profile" element={<ProfileForm />}/>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             
