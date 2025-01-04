@@ -5,6 +5,7 @@ import UserContext from './UserContext';
 import NavRoutes from './routes/NavRoutes.js';
 import useLocalStorage from "./hooks/useLocalStorage";
 import { decode } from 'jsonwebtoken';
+const crypto = require('crypto-browserify');
 import JoblyApi from "./api"
 import './App.css';
 
