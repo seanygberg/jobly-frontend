@@ -23,8 +23,6 @@ const ProfileForm = () => {
         username: "",
     });
 
-    const [formErrors, setFormErrors] = useState([]);
-
     async function handleSubmit(event) {
         event.preventDefault();
         let profileData = {
@@ -34,15 +32,7 @@ const ProfileForm = () => {
         };
 
         let username = formData.username;
-        let newUser;
-
-        try {
-            newUser = await JoblyApi.editProfile(username, profileData);
-        } catch (errors) {
-            console.error("Profile update failed:", errors);
-            setFormErrors(errors);
-            return;
-        }
+        let newUser = await JoblyApi.editProfile(username, profileData);
 
         setFormData({
             firstName: "",
@@ -50,7 +40,6 @@ const ProfileForm = () => {
             email: "",
             username: "",
         });
-        setFormErrors([]);
         setCurrentUser(newUser);
     }
 
@@ -60,7 +49,6 @@ const ProfileForm = () => {
             ...f,
             [name]: value,
         }));
-        setFormErrors([]);
     }
 
     return (
@@ -105,15 +93,6 @@ const ProfileForm = () => {
                     onChange={handleChange}
                 />
             </div>
-            {formErrors.length > 0 && (
-                <div>
-                    <ul>
-                        {formErrors.map((error, index) => (
-                            <li key={index}>{error}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
             <button type="submit">Save</button>
         </form>
     );
