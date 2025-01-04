@@ -16,12 +16,12 @@ const ProfileForm = () => {
         }
     }, [currentUser]);
 
-    const [formData, setFormData] = ({
+    const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         email: "",
         username: "",
-    });
+    });    
 
     async function handleSubmit(event) {
         event.preventDefault();
