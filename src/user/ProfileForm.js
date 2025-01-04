@@ -40,7 +40,7 @@ const ProfileForm = () => {
 
             let username = formData.username;
             console.log(username);
-            console.loading(profileData);
+            console.log(profileData);
             let newUser = await JoblyApi.editProfile(username, profileData);
 
             setFormData({
