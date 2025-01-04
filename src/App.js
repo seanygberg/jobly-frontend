@@ -7,9 +7,11 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import JoblyApi from "./api"
 import './App.css';
 
+export const TOKEN_STORAGE_ID = "jobly-token";
+
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useLocalStorage(null);
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
   useEffect(function loadUserInfo() {
     async function getCurrentUser() {
