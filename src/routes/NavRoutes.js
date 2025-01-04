@@ -21,7 +21,7 @@ function NavRoutes({ signup, login }) {
                 <PrivateRoute path="/jobs" />
                 <Route path="/login" element={<LoginForm login={login}/>} />
                 <Route path="/signup" element={<SignupForm signup={signup}/>} />
-                <PrivateRoute path="/profile" element={<ProfileForm />}/>
+                <Route path="/profile" element={<PrivateRoute> <ProfileForm /> </PrivateRoute>}/>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             
