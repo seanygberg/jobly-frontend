@@ -10,20 +10,17 @@ function NavRoutes({ signup, login }) {
      *          <Route path="/companies" element={<Companies />} />
                 <Route path="/companies/:handle" element={<CompanyDetail />} />
                 <Route path="/jobs" element={<Jobs />} />
-                <Route path="/login" element={<Login login={login} />} />
-                <Route path="/signup" element={<Signup signup={signup} />} />
-                <Route path="/profile" element={<Profile />} />
      */
     return (
         <div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/companies" />
-                <Route path="/companies/:handle" />
-                <Route path="/jobs" />
+                <PrivateRoute path="/companies" />
+                <PrivateRoute path="/companies/:handle" />
+                <PrivateRoute path="/jobs" />
                 <Route path="/login" element={<LoginForm login={login}/>} />
                 <Route path="/signup" element={<SignupForm signup={signup}/>} />
-                <Route path="/profile" element={<ProfileForm />}/>
+                <PrivateRoute path="/profile" element={<ProfileForm />}/>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             
