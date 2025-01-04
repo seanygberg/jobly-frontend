@@ -5,6 +5,7 @@ import UserContext from "../UserContext";
 
 const ProfileForm = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
+    const navigate = useNavigate("/");
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -52,7 +53,8 @@ const ProfileForm = () => {
             });
             setCurrentUser(newUser);
             setSuccess(true); // Indicate success
-            useNavigate("/");
+            navigate("/");
+            
         } catch (err) {
             setError(err.response?.data?.error?.message || "An unexpected error occurred.");
         }
