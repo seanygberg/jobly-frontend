@@ -11,7 +11,7 @@ const TOKEN_STORAGE_ID = "jobly-token";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+  const [token, setToken] = useLocalStorage(null);
 
   useEffect(function loadUserInfo() {
     async function getCurrentUser() {
