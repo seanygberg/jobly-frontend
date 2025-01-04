@@ -6,6 +6,7 @@ import NavRoutes from './routes/NavRoutes.js';
 import useLocalStorage from "./hooks/useLocalStorage";
 import jwt_decode from 'jwt-decode'; 
 import JoblyApi from "./api"
+const jwt = require('jsonwebtoken');
 import './App.css';
 
 export const TOKEN_STORAGE_ID = "jobly-token";
@@ -20,7 +21,7 @@ function App() {
         try {
           let decoded;
           try {
-            decoded = jwt_decode(token);
+            decoded = jwt.decode(token);
           } catch (decodeError) {
             console.error("JWT Decode Error:", decodeError);
             // You can redirect the user to login page if the token is invalid
