@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import JoblyApi from "../api/api";
-import UserContext from "./UserContext";
+import UserContext from "../UserContext";
 
 const ProfileForm = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
