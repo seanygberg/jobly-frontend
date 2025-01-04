@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import JoblyApi from "../api";
 import UserContext from "../UserContext";
 
@@ -51,6 +52,7 @@ const ProfileForm = () => {
             });
             setCurrentUser(newUser);
             setSuccess(true); // Indicate success
+            useNavigate("/");
         } catch (err) {
             setError(err.response?.data?.error?.message || "An unexpected error occurred.");
         }
