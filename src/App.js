@@ -4,7 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import UserContext from './UserContext';
 import NavRoutes from './routes/NavRoutes.js';
 import useLocalStorage from "./hooks/useLocalStorage";
-import JoblyApi from "./api"
+import JoblyApi from "./api";
+import { jwtDecode } from 'jwt-decode';
 import './App.css';
 
 export const TOKEN_STORAGE_ID = "jobly-token";
@@ -17,7 +18,9 @@ function App() {
     async function getCurrentUser() {
       if (token) {
         try {
-          const user = await JoblyApi.getUser(token);
+          const decodedPayload = jwtDecode(token);
+          console.log(decodedPayload.exp);
+          const user = await JoblyApi.getUser(decodedPayload.username);
           setCurrentUser(user);
         } catch (err) {
           console.error("Error loading user info:", err);
