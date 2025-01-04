@@ -40,9 +40,7 @@ function App() {
     try {
       const token = await JoblyApi.signup(data);
       console.log("User is signed up")
-      console.log(JoblyApi.token)
       setToken(token);
-      setCurrentUser(await JoblyApi.getUser(token));
     } catch (err) {
       console.error("Signup failed:", err);
     }
@@ -56,9 +54,7 @@ function App() {
     try {
       const token = await JoblyApi.login(data);
       console.log("User is logged in")
-      console.log(JoblyApi.token)
       setToken(token);
-      setCurrentUser(await JoblyApi.getUser(token));
     } catch (err) {
       console.error("Login failed:", err);
     }
