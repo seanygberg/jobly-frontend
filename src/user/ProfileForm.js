@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import JoblyApi from "../api/api";
+import JoblyApi from "../api";
 import UserContext from "../UserContext";
 
 const ProfileForm = () => {
