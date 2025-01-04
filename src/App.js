@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import UserContext from './UserContext';
 import NavRoutes from './routes/NavRoutes.js';
 import useLocalStorage from "./hooks/useLocalStorage";
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode'; 
 import JoblyApi from "./api"
 import './App.css';
 
