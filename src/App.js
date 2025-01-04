@@ -14,31 +14,38 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
-  useEffect(function loadUserInfo() {
+  useEffect(() => {
     async function getCurrentUser() {
       if (token) {
         try {
-          // Attempt to decode the JWT token
           let decoded;
           try {
             decoded = jwt_decode(token);
           } catch (decodeError) {
             console.error("JWT Decode Error:", decodeError);
-            return;  // Exit if decoding fails
+            // You can redirect the user to login page if the token is invalid
+            return;
           }
   
-          console.log(decoded);  // Check the decoded content
+          const currentTime = Date.now() / 1000;
+          if (decoded.exp && decoded.exp < currentTime) {
+            console.error("Token has expired.");
+            // Handle expired token (redirect to login or show a message)
+            return;
+          }
   
-          // Proceed to fetch user data if the token is valid
+          console.log(decoded);  // Log the decoded token for debugging
           const user = await JoblyApi.getUser(decoded.username);
-          setCurrentUser(user);  // Ensure this function is defined
+          setCurrentUser(user);
         } catch (err) {
           console.error("Error loading user info:", err);
         }
       }
     }
+  
     getCurrentUser();
   }, [token]);
+  
 
   const logout = () => {
     setCurrentUser(null);
