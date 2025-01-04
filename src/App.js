@@ -7,8 +7,6 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import JoblyApi from "./api"
 import './App.css';
 
-const TOKEN_STORAGE_ID = "jobly-token";
-
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(null);
