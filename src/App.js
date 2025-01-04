@@ -22,6 +22,7 @@ function App() {
           console.log(decodedPayload);
           const user = await JoblyApi.getUser(decodedPayload.username);
           setCurrentUser(user);
+          console.log(currentUser);
         } catch (err) {
           console.error("Error loading user info:", err);
         }
