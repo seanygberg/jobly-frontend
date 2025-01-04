@@ -20,7 +20,7 @@ function App() {
         try {
           const decodedPayload = jwtDecode(token);
           console.log(decodedPayload);
-          const user = await JoblyApi.getUser("admin1");
+          const user = await JoblyApi.getUser(decodedPayload.username);
           setCurrentUser(user);
         } catch (err) {
           console.error("Error loading user info:", err);
