@@ -19,6 +19,7 @@ function App() {
       if (token) {
         try {
           let decoded = jwt_decode(token);
+          console.log(decoded);
           const user = await JoblyApi.getUser(decoded.username);
           setCurrentUser(user);
         } catch (err) {
