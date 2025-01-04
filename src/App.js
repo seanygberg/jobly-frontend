@@ -4,9 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import UserContext from './UserContext';
 import NavRoutes from './routes/NavRoutes.js';
 import useLocalStorage from "./hooks/useLocalStorage";
-import jwt_decode from 'jwt-decode'; 
+import decode from 'jsonwebtoken';
 import JoblyApi from "./api"
-const jwt = require('jsonwebtoken');
 import './App.css';
 
 export const TOKEN_STORAGE_ID = "jobly-token";
@@ -15,38 +14,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
-  useEffect(() => {
+  useEffect(function loadUserInfo() {
     async function getCurrentUser() {
       if (token) {
         try {
-          let decoded;
-          try {
-            decoded = jwt.decode(token);
-          } catch (decodeError) {
-            console.error("JWT Decode Error:", decodeError);
-            // You can redirect the user to login page if the token is invalid
-            return;
-          }
-  
-          const currentTime = Date.now() / 1000;
-          if (decoded.exp && decoded.exp < currentTime) {
-            console.error("Token has expired.");
-            // Handle expired token (redirect to login or show a message)
-            return;
-          }
-  
-          console.log(decoded);  // Log the decoded token for debugging
-          const user = await JoblyApi.getUser(decoded.username);
+          let { username } = jwt.decode(token);
+          const user = await JoblyApi.getUser(username);
           setCurrentUser(user);
         } catch (err) {
           console.error("Error loading user info:", err);
         }
       }
     }
-  
     getCurrentUser();
   }, [token]);
-  
 
   const logout = () => {
     setCurrentUser(null);
