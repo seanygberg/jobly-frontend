@@ -17,7 +17,7 @@ function App() {
     async function getCurrentUser() {
       if (token) {
         try {
-          const user = await JoblyApi.getCurrentUser(token);
+          const user = await JoblyApi.getUser(token);
           setCurrentUser(user);
         } catch (err) {
           console.error("Error loading user info:", err);
@@ -39,8 +39,9 @@ function App() {
     }
     try {
       const token = await JoblyApi.signup(data);
+      console.log("User is signed up")
       setToken(token);
-      setCurrentUser(await JoblyApi.getCurrentUser(token));
+      setCurrentUser(await JoblyApi.getUser(token));
     } catch (err) {
       console.error("Signup failed:", err);
     }
@@ -53,8 +54,9 @@ function App() {
     }
     try {
       const token = await JoblyApi.login(data);
+      console.log("User is logged in")
       setToken(token);
-      setCurrentUser(await JoblyApi.getCurrentUser(token));
+      setCurrentUser(await JoblyApi.getUser(token));
     } catch (err) {
       console.error("Login failed:", err);
     }
