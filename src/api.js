@@ -28,17 +28,10 @@ class JoblyApi {
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
-      console.error("API Error:", err);
-    
-      if (err.response) {
-        let message = err.response.data.error.message;
-        throw Array.isArray(message) ? message : [message];
-      } else {
-        // Handle network or other errors
-        throw ["Network or unexpected error occurred"];
-      }
+      console.error("API Error:", err.response);
+      let message = err.response.data.error.message;
+      throw Array.isArray(message) ? message : [message];
     }
-        
   }
 
   // Individual API routes

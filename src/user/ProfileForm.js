@@ -4,7 +4,17 @@ import UserContext from "../UserContext";
 
 const ProfileForm = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
-    
+
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        username: "",
+    });
+
+    const [error, setError] = useState(null); // For handling errors
+    const [success, setSuccess] = useState(false); // For handling success
+
     useEffect(() => {
         if (currentUser) {
             setFormData({
@@ -16,31 +26,32 @@ const ProfileForm = () => {
         }
     }, [currentUser]);
 
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        username: "",
-    });    
-
     async function handleSubmit(event) {
         event.preventDefault();
-        let profileData = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-        };
+        setError(null); // Clear previous errors
+        setSuccess(false); // Reset success state
 
-        let username = formData.username;
-        let newUser = await JoblyApi.editProfile(username, profileData);
+        try {
+            let profileData = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+            };
 
-        setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            username: "",
-        });
-        setCurrentUser(newUser);
+            let username = formData.username;
+            let newUser = await JoblyApi.editProfile(username, profileData);
+
+            setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                username: "",
+            });
+            setCurrentUser(newUser);
+            setSuccess(true); // Indicate success
+        } catch (err) {
+            setError(err.response?.data?.error?.message || "An unexpected error occurred.");
+        }
     }
 
     function handleChange(evt) {
@@ -94,8 +105,10 @@ const ProfileForm = () => {
                 />
             </div>
             <button type="submit">Save</button>
+            {error && <div style={{ color: "red" }}>{error}</div>}
+            {success && <div style={{ color: "green" }}>Profile updated successfully!</div>}
         </form>
     );
-}
+};
 
 export default ProfileForm;
