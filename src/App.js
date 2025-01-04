@@ -18,10 +18,20 @@ function App() {
     async function getCurrentUser() {
       if (token) {
         try {
-          let decoded = jwt_decode(token);
-          console.log(decoded);
+          // Attempt to decode the JWT token
+          let decoded;
+          try {
+            decoded = jwt_decode(token);
+          } catch (decodeError) {
+            console.error("JWT Decode Error:", decodeError);
+            return;  // Exit if decoding fails
+          }
+  
+          console.log(decoded);  // Check the decoded content
+  
+          // Proceed to fetch user data if the token is valid
           const user = await JoblyApi.getUser(decoded.username);
-          setCurrentUser(user);
+          setCurrentUser(user);  // Ensure this function is defined
         } catch (err) {
           console.error("Error loading user info:", err);
         }
