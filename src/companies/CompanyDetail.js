@@ -6,6 +6,7 @@ const CompanyDetail = () => {
 
     const { handle } = useParams(); 
     const [company, setCompany] = useState(null);
+    const [jobs, setJobs] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -13,6 +14,7 @@ const CompanyDetail = () => {
             try {
                 const data = await JoblyApi.getCompany(handle);
                 setCompany(data);
+                setJobs(companyData.jobs);
             } catch (err) {
                 setError("Company not found.");
             }
@@ -24,9 +26,16 @@ const CompanyDetail = () => {
 
     return (
         <div>
-            <h1>{company?.name}</h1>
-            <p>{company?.description}</p>
-            <p>{company?.numEmployees} employees</p>
+            <h1>{company.name}</h1>
+            <p>{company.description}</p>
+            <p>{company.numEmployees} employees</p>
+            
+            <h2>Jobs Available</h2>
+            {jobs.length > 0 ? (
+                jobs.map((job) => <JobCard key={job.id} job={job} />)
+            ) : (
+                <p>No jobs available at this company.</p>
+            )}
         </div>
     );
 }
