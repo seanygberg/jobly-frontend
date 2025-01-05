@@ -28,5 +28,7 @@ const CompanyDetail = () => {
             <p>{company?.numEmployees} employees</p>
         </div>
     );
-
 }
+
+
+export default CompanyDetail;
