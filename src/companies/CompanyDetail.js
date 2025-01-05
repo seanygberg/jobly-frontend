@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; 
+import JobCard from '../jobs/JobCard';
 import JoblyApi from "../api";  
 
 const CompanyDetail = () => {
@@ -14,7 +15,7 @@ const CompanyDetail = () => {
             try {
                 const data = await JoblyApi.getCompany(handle);
                 setCompany(data);
-                setJobs(companyData.jobs);
+                setJobs(data.jobs);
             } catch (err) {
                 setError("Company not found.");
             }
