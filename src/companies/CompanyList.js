@@ -8,17 +8,18 @@ const CompanyList = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchCompanies = async () => {
-            try {
-                const companiesData = await JoblyApi.getCompanies(search);
-                setCompanies(companiesData);
-            } catch (err) {
-                setError("Error fetching companies.");
-            }
-        };
+        let companies = await JoblyApi.getCompanies();
+        setCompanies(companies);
+    }, []); 
 
-        fetchCompanies();
-    }, [search]); 
+    const fetchCompanies = async () => {
+        try {
+            const companiesData = await JoblyApi.getCompanies(search);
+            setCompanies(companiesData);
+        } catch (err) {
+            setError("Error fetching companies.");
+        }
+    };
 
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
