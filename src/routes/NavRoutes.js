@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../home/Home.js";
+import CompanyList from "./components/CompanyList";
+import CompanyDetail from "./components/CompanyDetail";
 import LoginForm from "../user/LoginForm.js";
 import SignupForm from "../user/SignupForm.js";
 import ProfileForm from "../user/ProfileForm.js";
@@ -28,7 +30,7 @@ function NavRoutes({ signup, login }) {
                     path="/companies"
                     element={
                         <PrivateRoute>
-                            <div>Companies Component Placeholder</div>
+                            <CompanyList />
                         </PrivateRoute>
                     }
                 />
@@ -36,7 +38,7 @@ function NavRoutes({ signup, login }) {
                     path="/companies/:handle"
                     element={
                         <PrivateRoute>
-                            <div>Company Detail Component Placeholder</div>
+                            <CompanyDetail />
                         </PrivateRoute>
                     }
                 />
