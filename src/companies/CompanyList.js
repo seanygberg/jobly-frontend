@@ -10,8 +10,12 @@ const CompanyList = () => {
     // Load all companies on initial render
     useEffect(() => {
         async function loadCompanies() {
-            let companies = await JoblyApi.getCompanies();
-            setCompanies(companies);
+            try {
+                const companiesData = await JoblyApi.getCompanies();
+                setCompanies(companiesData);
+            } catch (err) {
+                setError("Error fetching companies.");
+            }
         }
 
         loadCompanies();
@@ -31,16 +35,13 @@ const CompanyList = () => {
         if (search) {
             fetchCompanies();
         } else {
-            // If there's no search term, load all companies
             loadCompanies();
         }
-    }, [search]); // Only re-run when search changes
+    }, [search]);
 
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
     };
-
-    console.log(companies);
 
     if (error) return <div>{error}</div>;
 
