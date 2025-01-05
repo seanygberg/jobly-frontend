@@ -29,6 +29,8 @@ const CompanyList = () => {
         setSearch(e.target.value);
     };
 
+    console.log(companies);
+
     if (error) return <div>{error}</div>;
     
     return (
