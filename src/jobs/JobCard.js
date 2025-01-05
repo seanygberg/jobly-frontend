@@ -21,11 +21,11 @@ const JobCard = ({ job }) => {
             <p><strong>Company:</strong> {job.companyHandle}</p>
             <p><strong>Salary:</strong> {job.salary ? `$${job.salary}` : "Not Provided"}</p>
             <p><strong>Equity:</strong> {job.equity ? `${job.equity}%` : "Not Provided"}</p>
-        </div>
 
-        <button onClick={handleApply} disabled={isApplied} style={{ backgroundColor: isApplied ? 'gray' : 'white' }}>
-            {isApplied ? "Applied" : "Apply"}
-        </button>
+            <button onClick={handleApply} disabled={isApplied} style={{ backgroundColor: isApplied ? 'gray' : 'white' }}>
+                {isApplied ? "Applied" : "Apply"}
+            </button>
+        </div>
     );
 };
 
