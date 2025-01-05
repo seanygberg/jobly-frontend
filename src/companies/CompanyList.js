@@ -8,8 +8,10 @@ const CompanyList = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        let companies = await JoblyApi.getCompanies();
-        setCompanies(companies);
+        async function loadCompanies() {
+            let companies = await JoblyApi.getCompanies();
+            setCompanies(companies);
+        } 
     }, []); 
 
     const fetchCompanies = async () => {
