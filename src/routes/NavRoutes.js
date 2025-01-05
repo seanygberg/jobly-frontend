@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../home/Home.js";
-import CompanyList from "./components/CompanyList";
-import CompanyDetail from "./components/CompanyDetail";
+import CompanyList from "../companies/CompanyList.js";
+import CompanyDetail from "../companies/CompanyDetail.js";
 import LoginForm from "../user/LoginForm.js";
 import SignupForm from "../user/SignupForm.js";
 import ProfileForm from "../user/ProfileForm.js";
