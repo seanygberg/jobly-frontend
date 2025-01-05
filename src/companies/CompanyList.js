@@ -12,6 +12,7 @@ const CompanyList = () => {
         async function loadCompanies() {
             try {
                 const companiesData = await JoblyApi.getCompanies();
+                console.log(companiesData);
                 setCompanies(companiesData);
             } catch (err) {
                 setError("Error fetching companies.");
