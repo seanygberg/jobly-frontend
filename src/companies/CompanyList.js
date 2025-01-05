@@ -34,8 +34,6 @@ const CompanyList = () => {
 
         if (search) {
             fetchCompanies();
-        } else {
-            loadCompanies();
         }
     }, [search]);
 
