@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import JoblyApi from "../api";
 import UserContext from "../UserContext";
 
 const ProfileForm = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -51,10 +51,10 @@ const ProfileForm = () => {
                 email: newUser.email,
                 username: newUser.username,
             });
-                        
+
             setCurrentUser(newUser);
             setSuccess(true);
-            history.push("/");
+            navigate.push("/");
 
         } catch (err) {
             setError(err.response?.data?.error?.message || "An unexpected error occurred.");
