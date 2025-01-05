@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import JoblyApi from "../api";  // Make sure to import the API to fetch company details
+import { useParams } from "react-router-dom"; 
+import JoblyApi from "../api";  
 
 const CompanyDetail = () => {
 
