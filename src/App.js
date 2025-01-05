@@ -13,6 +13,7 @@ export const TOKEN_STORAGE_ID = "jobly-token";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+  const [jobApplyIds, setJobApplyIds] = useState(new Set([]));
 
   useEffect(function loadUserInfo() {
     async function getCurrentUser() {
@@ -63,10 +64,20 @@ function App() {
     }
   }
 
+  function jobApplied(id) {
+    return jobApplyIds.has(id);
+  }
+
+  function jobApply(id) {
+    if (jobApplied(id)) return;
+    JoblyApi.jobApply(currentUser.username, id);
+    setJobApplyIds(new Set([...jobApplyIds, id]));
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <UserContext.Provider value={{ currentUser, setCurrentUser, jobApplied, jobApply }}>
           <NavBar logout={logout}></NavBar>
           <NavRoutes signup={signup} login={login}></NavRoutes>
         </UserContext.Provider>

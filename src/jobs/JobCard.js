@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import UserContext from "../UserContext";
 
 const JobCard = ({ job }) => {
-    const [error, setError] = useState(null);
-    const [isApplied, setIsApplied] = useState(appliedJobs.includes(job.id));
+    const { jobApplied, jobApply } = useContext(UserContext);
+    const [applied, setApplied] = useState(false);
 
-    const handleApply = async () => {
-        try {
-            if (isApplied) return; 
-            await JoblyApi.applyToJob(job.id); 
-            setIsApplied(true); 
-            setAppliedJobs([...appliedJobs, job.id]);
-        } catch (err) {
-            setError("Unable to apply for this job.");
-        }
-    };
+    useEffect(() => {
+        setApplied(jobApplied(job.id));
+    }, [job.id, jobApplied]);
+
+    async function handleApply(evt) {
+        if (applied) return;
+        jobApply(job.id);
+        setApplied(true);
+    }
 
     return (
         <div className="job-card">
@@ -21,9 +21,12 @@ const JobCard = ({ job }) => {
             <p><strong>Company:</strong> {job.companyHandle}</p>
             <p><strong>Salary:</strong> {job.salary ? `$${job.salary}` : "Not Provided"}</p>
             <p><strong>Equity:</strong> {job.equity ? `${job.equity}%` : "Not Provided"}</p>
-
-            <button onClick={handleApply} disabled={isApplied} style={{ backgroundColor: isApplied ? 'gray' : 'white' }}>
-                {isApplied ? "Applied" : "Apply"}
+            <button 
+                onClick={handleApply} 
+                disabled={applied} 
+                style={{ backgroundColor: applied ? 'gray' : 'white' }}
+            >
+                {applied ? "Applied" : "Apply"}
             </button>
         </div>
     );
