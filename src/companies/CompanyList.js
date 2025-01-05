@@ -52,9 +52,9 @@ const CompanyList = () => {
                 onChange={handleSearchChange}
             />
             <div className="company-list">
-                {companies.map(company => (
+                {companies ? companies.map(company => (
                     <CompanyCard key={company.handle} company={company} />
-                ))}
+                )): <div></div>}
             </div>
         </div>
     );
